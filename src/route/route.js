@@ -8,5 +8,6 @@ router.post("/login", AdminController.Login)
 
 router.post("/studentregister", StudentController.StudentRegister)
 router.post("/studentlogin", StudentController.StudentLogin)
+router.get("/report", StudentController.StudentList)
 
 module.exports = router

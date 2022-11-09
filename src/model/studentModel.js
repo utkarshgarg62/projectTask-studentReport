@@ -20,7 +20,7 @@ const studentSchema = new mongoose.Schema({
     subject: {
         subjectName: {
             type: String,
-            trim: true
+            trim: true,
         },
         marks: {
             type: Number,
