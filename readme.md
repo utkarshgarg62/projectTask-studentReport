@@ -1,0 +1,1 @@
+- npm i express, mongoose, body-parser, nodemon, jsonwebtoken,
