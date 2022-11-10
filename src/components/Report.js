@@ -1,9 +1,14 @@
 import React from "react"
 import { useState, useEffect } from "react";
+// import cookies from "js-cookie";
 import axios from "axios"
 const api = "http://localhost:5000/report"
 
+
 const Report = () => {
+    // let studentId = cookies.get("id")
+    // console.log(studentId)
+
     const [studentList, setStudentList] = useState();
 
     useEffect(() => {
@@ -16,20 +21,6 @@ const Report = () => {
     });
 
     return <div>
-        <table id="customers">
-            <tr>
-                <td>index</td>
-                <td>student name</td>
-                <td>email</td>
-                <td>Physics</td>
-                <td>Chemistry</td>
-                <td>Maths</td>
-                <td>English</td>
-                <td>Computer</td>
-                <td>P.ed</td>
-                <td><button>Edit</button><button>Delete</button></td>
-            </tr>
-        </table>
         <h1>Student Lists</h1>
         {studentList && studentList.length > 0 && (
             <table id="customers">
