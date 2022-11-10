@@ -49,7 +49,7 @@ module.exports.StudentLogin = StudentLogin
 
 const StudentList = async (req, res) => {
     try {
-        let studentList = await studentModel.find()
+        let studentList = await studentModel.find({ isDeleted: false })
         if (studentList.length == 0) { return res.status(404).send({ status: false, message: "List is Empty" }) }
         res.status(200).send({ status: true, data: studentList });
     }
@@ -71,3 +71,71 @@ const StudentById = async (req, res) => {
     }
 }
 module.exports.StudentById = StudentById
+
+
+
+// const updateMarks = async function (req, res) {
+//     try {
+//         let id = req.params.studentId
+//         let data = req.body
+//         let { physics, chemistry, maths, english, computer } = data
+//         let updateData = await studentModel.findOneAndUpdate({ _id: id }, {
+//             $set: {
+//                 physics: physics,
+//                 chemistry: chemistry,
+//                 maths: maths,
+//                 english: english,
+//                 computer: computer
+//             }
+//         }, { new: true });
+//         res.status(200).send({ status: true, data: updateData });
+//     }
+//     catch (error) {
+//         res.status(500).send({ status: false, message: error })
+//     }
+// }
+// module.exports.updateMarks = updateMarks
+
+
+const updateById = async function (req, res) {
+    try {
+        let data = req.body
+        let { studentId, physics, chemistry, maths, english, computer } = data
+        let dbCall = await studentModel.findById({ _id: studentId })
+
+        let totalPhysics = parseInt(dbCall.physics) + parseInt(physics)
+        let totalChemistry = parseInt(dbCall.chemistry) + parseInt(chemistry)
+        let totalMaths = parseInt(dbCall.maths) + parseInt(maths)
+        let totalEnglish = parseInt(dbCall.english) + parseInt(english)
+        let totalComputer = parseInt(dbCall.computer) + parseInt(computer)
+
+        let updateData = await studentModel.findOneAndUpdate({ _id: studentId }, {
+            $set: {
+                physics: totalPhysics,
+                chemistry: totalChemistry,
+                maths: totalMaths,
+                english: totalEnglish,
+                computer: totalComputer
+            }
+        }, { new: true });
+        res.status(200).send({ status: true, data: updateData });
+    }
+    catch (error) {
+        res.status(500).send({ status: false, message: error })
+    }
+}
+module.exports.updateById = updateById
+
+
+const deleteById = async function (req, res) {
+    try {
+        let data = req.body
+        let { studentId } = data
+        let updateData = await studentModel.updateOne({ _id: studentId }, { isDeleted: true }, { new: true })
+        res.status(200).send({ status: true, message: "Deleted SuccessFully" });
+    }
+    catch (error) {
+        res.status(500).send({ status: false, message: error })
+    }
+}
+module.exports.deleteById = deleteById
