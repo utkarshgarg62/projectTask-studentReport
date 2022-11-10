@@ -29,7 +29,7 @@ const StudentLogin = async function (req, res) {
         if (!password) { return res.status(400).send({ status: false, message: "Please provide password" }); }
 
         let studentDBcall = await studentModel.findOne({ $and: [{ email: email }, { password: password }] })
-        if (!studentDBcall) { return res.status(401).send({ status: false, message: "Invalid email or password" }) }
+        if (!studentDBcall) { return res.status(400).send({ status: false, message: "Invalid email or password" }) }
 
         let studentId = studentDBcall._id
         let token = jwt.sign({
@@ -38,6 +38,7 @@ const StudentLogin = async function (req, res) {
             exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60 //expires in 24 hr 
 
         }, "task-project1")
+        // res.cookie("jwt",token)
         res.status(200).send({ status: true, message: "Success", data: { studentId, token } });
     }
     catch (error) {
@@ -49,7 +50,7 @@ module.exports.StudentLogin = StudentLogin
 const StudentList = async (req, res) => {
     try {
         let studentList = await studentModel.find()
-        if (studentList.length == 0) { return res.status(401).send({ status: false, message: "List is Empty" }) }
+        if (studentList.length == 0) { return res.status(404).send({ status: false, message: "List is Empty" }) }
         res.status(200).send({ status: true, data: studentList });
     }
     catch (error) {
@@ -57,3 +58,16 @@ const StudentList = async (req, res) => {
     }
 }
 module.exports.StudentList = StudentList
+
+const StudentById = async (req, res) => {
+    try {
+        let studentId = req.params.studentId
+        let studentData = await studentModel.findById({ _id: studentId })
+        if (!studentData) { return res.status(404).send({ status: false, message: "Student Not Found" }) }
+        res.status(200).send({ status: true, data: studentData });
+    }
+    catch (error) {
+        res.status(500).send({ status: false, message: error })
+    }
+}
+module.exports.StudentById = StudentById

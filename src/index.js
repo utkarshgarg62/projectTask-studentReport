@@ -4,11 +4,12 @@ const mongoose = require("mongoose")
 const route = require("./route/route")
 const PORT = process.env.PORT || 5000
 const cors = require("cors")
-
+// const cookieParser = require('cookie-parser')
 
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
+// app.use(cookieParser())
 
 mongoose.connect("mongodb+srv://functionup-radon-cohort:radon123@cluster0.zbsotuc.mongodb.net/task-project1", {
     useNewUrlParser: true
