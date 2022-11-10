@@ -8,6 +8,7 @@ import StudentReport from "./components/StudentReport"
 import Report from "./components/Report"
 import Main from "./components/main"
 import Edit from "./components/edit"
+import Delete from "./components/delete"
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -25,6 +26,7 @@ root.render(
           <Route path="reports" element={<Report />}></Route>
           <Route path="studentreport" element={<StudentReport />}></Route>
           <Route path="edit" element={<Edit />}></Route>
+          <Route path="delete" element={<Delete />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -34,6 +34,7 @@ const Report = () => {
                     <th>English</th>
                     <th>Computer</th>
                     <th></th>
+                    <th></th>
                 </tr>
                 {studentList.map((student, index) => (
 
@@ -47,6 +48,7 @@ const Report = () => {
                         <td>{student.english}</td>
                         <td>{student.computer}</td>
                         <td><NavLink to="/edit">Edit</NavLink></td>
+                        <td><NavLink to="/delete">Delete</NavLink></td>
                     </tr>
                 ))}
             </table>

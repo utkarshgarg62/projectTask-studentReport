@@ -1,6 +1,4 @@
-import React, {
-    useState,
-} from "react"
+import React, { useState } from "react"
 import axios from "axios"
 
 const Edit = () => {
@@ -12,6 +10,7 @@ const Edit = () => {
     const [maths, setMaths] = useState("0");
     const [english, setEnglish] = useState("0");
     const [computer, setComputer] = useState("0");
+    const [result, setResult] = useState("")
 
     const handle = async (e) => {
         e.preventDefault()
@@ -24,6 +23,7 @@ const Edit = () => {
                 english: english,
                 computer: computer
             })
+            setResult("Success")
             console.log(response)
             console.log("Sucess")
         }
@@ -40,6 +40,7 @@ const Edit = () => {
                 <form className="login-form"
                     onSubmit={handle}
                     method="POST">
+                    {result !== "" && <div className="alert alert-success" role="alert">{result}</div>}
                     <span>StudentId</span><input type="text" placeholder="studentId" name="studentId"
                         value={studentId} onChange={(e) => setStudentId(e.target.value)}
                     />
