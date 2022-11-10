@@ -1,6 +1,6 @@
 import React from "react"
 import { useState, useEffect } from "react";
-// import cookies from "js-cookie";
+import { NavLink } from "react-router-dom";
 import axios from "axios"
 const api = "http://localhost:5000/report"
 
@@ -23,7 +23,7 @@ const Report = () => {
     return <div>
         <h1>Student Lists</h1>
         {studentList && studentList.length > 0 && (
-            <table id="customers">
+            <table id="student">
                 <tr>
                     <th>S.No.</th>
                     <th>Name</th>
@@ -33,7 +33,7 @@ const Report = () => {
                     <th>Maths</th>
                     <th>English</th>
                     <th>Computer</th>
-                    <th>P.ed</th>
+                    <th></th>
                 </tr>
                 {studentList.map((student, index) => (
 
@@ -41,17 +41,12 @@ const Report = () => {
                         <td>{index + 1}</td>
                         <td>{student.name}</td>
                         <td>{student.email}</td>
-                        <td>{index + 1}</td>
-                        <td>{index + 1}</td>
-                        <td>{index + 1}</td>
-                        <td>{index + 1}</td>
-                        <td>{index + 1}</td>
-                        <td>{index + 1}</td>
-                        {/* <td>{student.Physics}</td>
-                        <td>{student.Chemistry}</td>
-                        <td>{student.Maths}</td>
-                        <td>{student.English}</td>
-                        <td>{student.P.ed}</td> */}
+                        <td>{student.physics}</td>
+                        <td>{student.chemistry}</td>
+                        <td>{student.maths}</td>
+                        <td>{student.english}</td>
+                        <td>{student.computer}</td>
+                        <td><NavLink to="/edit">Edit</NavLink></td>
                     </tr>
                 ))}
             </table>

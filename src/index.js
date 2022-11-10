@@ -7,6 +7,7 @@ import RegisterPage from "./components/RegisterPage"
 import StudentReport from "./components/StudentReport"
 import Report from "./components/Report"
 import Main from "./components/main"
+import Edit from "./components/edit"
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -23,11 +24,7 @@ root.render(
           <Route path="register" element={<RegisterPage />}></Route>
           <Route path="reports" element={<Report />}></Route>
           <Route path="studentreport" element={<StudentReport />}></Route>
-          {/* <Route path="login" element={<AuthorLogin />}></Route>
-          <Route path="new-account" element={<NewAccount />}></Route>
-          <Route path="new-book" element={<CreateBooks />}></Route>
-          <Route path="bookslist" element={<BooksList />}></Route>
-          <Route path="books/:id" element={<ViewBook />}></Route> */}
+          <Route path="edit" element={<Edit />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

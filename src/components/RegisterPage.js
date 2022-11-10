@@ -1,10 +1,12 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import "./style.css"
 
 const api = "http://localhost:5000/studentregister";
 
 const RegisterPage = () => {
+    let navigate = useNavigate();
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -20,8 +22,11 @@ const RegisterPage = () => {
                 email: email,
                 password: password
             })
+            setTimeout(function () {
+                navigate("/login", { replace: true });
+            }, 3000);
             console.log(response)
-            setResult("Success")
+            setResult("Success.. redirecting to login page")
             console.log("Sucess")
         }
         catch (err) {
@@ -34,27 +39,20 @@ const RegisterPage = () => {
     console.log(result)
 
     return <div>
-        <form method="POST" onSubmit={handle} style={{ border: "1px solid #ccc" }}>
-            <h1>RegisterPage</h1>
-            <div class="container">
 
-                {result !== "" && <div class="alert alert-success" role="alert">{result}</div>}
-                {isError !== "" && <div class="alert alert-danger" role="alert">{isError.message}</div>}
-                <label for="name"><b>Name</b></label>
-                <br></br>
-                <input type="text" placeholder="Enter Name" name="name" value={name} onChange={(e) => setName(e.target.value)} />
-                <br></br>
-                <label for="email"><b>Email</b></label>
-                <br></br>
-                <input type="text" placeholder="Enter Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <br></br>
-                <label for="psw"><b>Password</b></label>
-                <br></br>
-                <input type="password" placeholder="Enter Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <br></br>
-                <button>Register</button>
+        <div className="login-page">
+            <div className="form">
+                <h2>Register Page</h2>
+                {result !== "" && <div className="alert alert-success" role="alert">{result}</div>}
+                {isError !== "" && <div className="alert alert-danger" role="alert">{isError.message}</div>}
+                <form className="login-form" onSubmit={handle} method="POST">
+                    <input type="text" placeholder="Enter Name" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" placeholder="Enter Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="password" placeholder="Enter Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <button>login</button>
+                </form>
             </div>
-        </form >
+        </div>
     </div >
 }
 export default RegisterPage;

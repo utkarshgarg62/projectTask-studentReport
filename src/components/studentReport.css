@@ -1,0 +1,32 @@
+/* Table */
+#studentReport {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+#studentReport td,
+#studentReport th {
+  border: 2px solid #ddd;
+  padding: 30px;
+}
+
+#studentReport tr:nth-child(even) {
+  background-color: rgb(153, 180, 137);
+}
+
+#studentReport tr:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+#studentReport th {
+  padding-top: 30px;
+  padding-bottom: 50px;
+  text-align: center;
+  background-color: #0f4431;
+  color: white;
+}
+
+.container {
+  align-items: center;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios"
 import "./style.css"
 import cookie from "js-cookie"
@@ -24,7 +24,7 @@ const LoginPage = () => {
             setTimeout(function () {
                 navigate("/studentreport", { replace: true });
             }, 3000);
-            setResult(response.data)
+            setResult("Success")
             let studentId = response.data.data.studentId
             cookie.set("id", studentId)
             console.log("Sucess")
@@ -33,26 +33,24 @@ const LoginPage = () => {
             console.log("Unsucess")
             setIsError(err.response.data)
         }
-
     }
 
+
     return <div>
-        <form method="POST" onSubmit={handle} style={{ border: "1px solid #ccc" }}>
-            <h1>LoginPage</h1>
-            <div class="container">
-                {result !== "" && <div class="alert alert-success" role="alert">student id - {result.data.studentId}</div>}
-                {isError !== "" && <div class="alert alert-danger" role="alert">{isError.message}</div>}
-                <label for="email"><b>Email</b></label>
-                <br></br>
-                <input type="text" placeholder="Enter Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <br></br>
-                <label for="psw"><b>Password</b></label>
-                <br></br>
-                <input type="password" placeholder="Enter Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <br></br>
-                <button>Login</button>
+
+        <div className="login-page">
+            <div className="form">
+                <h2>Login Page</h2>
+                {result !== "" && <div className="alert alert-success" role="alert">{result}</div>}
+                {isError !== "" && <div className="alert alert-danger" role="alert">{isError.message}</div>}
+                <form className="login-form" onSubmit={handle} method="POST">
+                    <input type="text" placeholder="Enter Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="password" placeholder="Enter Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <button>login</button>
+                    <p className="message">Not registered? <NavLink to="/register">Create an account</NavLink></p>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 }
 export default LoginPage;
