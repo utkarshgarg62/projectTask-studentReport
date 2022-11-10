@@ -131,7 +131,9 @@ const deleteById = async function (req, res) {
     try {
         let data = req.body
         let { studentId } = data
-        let updateData = await studentModel.updateOne({ _id: studentId }, { isDeleted: true }, { new: true })
+        console.log(studentId)
+        let updateData = await studentModel.findOneAndUpdate({ _id: studentId }, { $set: { isDeleted: true } }, { new: true })
+        console.log(updateData)
         res.status(200).send({ status: true, message: "Deleted SuccessFully" });
     }
     catch (error) {
